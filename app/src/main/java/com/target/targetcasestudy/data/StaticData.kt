@@ -6,7 +6,7 @@ object StaticData {
     DealItem(
       id = 0,
       title = "Product 1",
-      description = "This is product number 1",
+      description = "This is product number 1 description for testing purposes",
       price = "$10.99",
       aisle = "a1"
     ),

@@ -6,5 +6,5 @@ data class DealItem(
   var description: String,
   var price: String,
   var aisle: String,
-  val imageUrl: String = "https://picsum.photos/200/300"
+  val imageUrl: String = "https://picsum.photos/200"
 )

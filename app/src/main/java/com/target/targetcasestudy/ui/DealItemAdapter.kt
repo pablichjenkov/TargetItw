@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.FitCenter
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
@@ -34,13 +35,13 @@ class DealItemAdapter(
     override fun onBindViewHolder(viewHolder: DealItemViewHolder, position: Int) {
         val item = dealItemList[position]
         loadImage(viewHolder.itemImage, item.imageUrl)
-        viewHolder.itemTitle.text = item.title
+        viewHolder.itemTitle.text = item.description
         viewHolder.itemPrice.text = item.price
     }
 
     private fun loadImage(imageView: ImageView, imageUrl: String) {
         var requestOptions = RequestOptions()
-        requestOptions = requestOptions.transforms(FitCenter(), RoundedCorners(16))
+        requestOptions = requestOptions.transform(CenterInside(), RoundedCorners(24))
         /*Glide.with(imageView.context)
             .load(imageUrl)
             .apply(requestOptions)
@@ -49,6 +50,7 @@ class DealItemAdapter(
 
         Glide.with(imageView.context)
             .load(imageUrl)
+            .apply(requestOptions)
             .into(imageView)
     }
 
