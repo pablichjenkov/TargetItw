@@ -9,9 +9,9 @@ import javax.inject.Inject
 
 class DealCollectionUseCase @Inject constructor(
     private val dealApi: DealApiKtx,
-) {
+) : IDealCollectionUseCase {
 
-    suspend fun getAll(): Result {
+    override suspend fun getAll(): Result {
 
         return try {
             Result.Success(dealApi.retrieveDeals().products)

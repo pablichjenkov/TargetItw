@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.target.targetcasestudy.api.DealFull
 import com.target.targetcasestudy.data.ApiError
 import com.target.targetcasestudy.data.usecase.FullDealUseCase
+import com.target.targetcasestudy.data.usecase.IFullDealUseCase
 import com.target.targetcasestudy.di.DispatcherContainer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DealItemVM @Inject constructor(
-    private val fullDealUseCase: FullDealUseCase,
+    private val fullDealUseCase: IFullDealUseCase,
     private val dispatcherContainer: DispatcherContainer
 ) : ViewModel() {
 

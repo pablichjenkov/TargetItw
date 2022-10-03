@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.target.targetcasestudy.api.DealPartial
 import com.target.targetcasestudy.data.usecase.DealCollectionUseCase
+import com.target.targetcasestudy.data.usecase.IDealCollectionUseCase
 import com.target.targetcasestudy.di.DispatcherContainer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DealListVM @Inject constructor(
-    private val dealCollectionUseCase: DealCollectionUseCase,
+    private val dealCollectionUseCase: IDealCollectionUseCase,
     private val dispatcherContainer: DispatcherContainer
 ) : ViewModel() {
 

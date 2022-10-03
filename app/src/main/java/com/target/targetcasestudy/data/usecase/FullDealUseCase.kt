@@ -12,9 +12,9 @@ import javax.inject.Inject
 class FullDealUseCase @Inject constructor(
     private val dealApi: DealApiKtx,
     private val gson: Gson
-) {
+) : IFullDealUseCase {
 
-    suspend fun getDeal(dealId: Long): Result {
+    override suspend fun getDeal(dealId: Long): Result {
 
         return try {
             Result.Success(dealApi.retrieveDeal(dealId))

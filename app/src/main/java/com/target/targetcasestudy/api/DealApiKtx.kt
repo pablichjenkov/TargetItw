@@ -4,7 +4,6 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface DealApiKtx {
-
   @GET("${Urls.BASE_URL}/deals")
   suspend fun retrieveDeals(): DealsResponse
 

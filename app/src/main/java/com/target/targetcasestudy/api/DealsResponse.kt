@@ -2,7 +2,7 @@ package com.target.targetcasestudy.api
 
 import com.google.gson.annotations.SerializedName
 
-class DealsResponse {
+class DealsResponse (
     @SerializedName("products")
-    var products: List<DealPartial> = emptyList()
-}
+    var products: List<DealPartial>
+)
