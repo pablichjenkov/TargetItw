@@ -1,0 +1,36 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#fff">
+
+    <LinearLayout
+        android:id="@+id/deal_list_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="Product Details" />
+
+        <TextView
+            android:id="@+id/deal_list_item_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/gray_color"
+            android:textSize="18sp"
+            tool:text="Product 1 respective information goes here. Should be a long text" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+

@@ -2,7 +2,7 @@ package com.target.targetcasestudy.api
 
 import com.google.gson.annotations.SerializedName
 
-data class Deal(
+data class DealPartial(
     @SerializedName("id")
     val id: Long,
 

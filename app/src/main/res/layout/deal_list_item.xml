@@ -4,7 +4,7 @@
     android:id="@+id/deal_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:background="#fff">
 
     <ImageView
         android:id="@+id/deal_list_item_image_view"

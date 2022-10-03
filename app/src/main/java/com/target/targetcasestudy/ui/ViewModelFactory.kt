@@ -3,6 +3,8 @@ package com.target.targetcasestudy.ui
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.target.targetcasestudy.ui.viewmodel.DealItemVM
+import com.target.targetcasestudy.ui.viewmodel.DealListVM
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
@@ -28,7 +30,13 @@ class ViewModelFactory @Inject constructor(
                 hiltEntryPoint.provideDealListVM() as T
             }
 
-            else -> throw ClassNotFoundException()
+            DealItemVM::class.java -> {
+                hiltEntryPoint.provideDealItemVM() as T
+            }
+
+            else -> throw ClassNotFoundException(
+                "You forgot to add ${modelClass} to ViewModelFactory"
+            )
         }
 
     }
@@ -39,4 +47,5 @@ class ViewModelFactory @Inject constructor(
 @InstallIn(SingletonComponent::class)
 interface ViewModelFactoryHiltEntryPoint {
     fun provideDealListVM(): DealListVM
+    fun provideDealItemVM(): DealItemVM
 }

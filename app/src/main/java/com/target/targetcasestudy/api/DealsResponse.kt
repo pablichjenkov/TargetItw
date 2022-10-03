@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 class DealsResponse {
     @SerializedName("products")
-    var products: List<Deal> = emptyList()
+    var products: List<DealPartial> = emptyList()
 }

@@ -8,6 +8,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -19,8 +20,12 @@ object HttpModule {
 
     @Provides
     @Singleton
-    fun providesDealApiKtx(gson: Gson): DealApiKtx {
+    fun providesDealApiKtx(
+        okHttpClient: OkHttpClient,
+        gson: Gson
+    ): DealApiKtx {
         return Retrofit.Builder()
+            .client(okHttpClient)
             .baseUrl(Urls.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -30,9 +35,10 @@ object HttpModule {
     @Provides
     @Singleton
     fun providesOkHttpClient(
-    ) : OkHttpClient {
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
-            //.addInterceptor(loggingInterceptor)
+            .addInterceptor(loggingInterceptor)
             .connectTimeout(1, TimeUnit.MINUTES)
             .readTimeout(1, TimeUnit.MINUTES)
             .writeTimeout(1, TimeUnit.MINUTES)
@@ -43,19 +49,20 @@ object HttpModule {
     @Provides
     @Singleton
     fun providesGson(
-    ) : Gson {
+    ): Gson {
         return Gson()
             .newBuilder()
             .setPrettyPrinting()
             .create()
     }
 
-    /*@Provides
+    @Provides
+    @Singleton
     fun providesHttpLoggingInterceptor(
-    ) : HttpLoggingInterceptor {
+    ): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
-    }*/
+    }
 
 }

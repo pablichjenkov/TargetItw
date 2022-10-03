@@ -9,5 +9,5 @@ interface DealApiKtx {
   suspend fun retrieveDeals(): DealsResponse
 
   @GET("${Urls.BASE_URL}/deals/{dealId}")
-  suspend fun retrieveDeal(@Path("dealId") dealId: String): Deal
+  suspend fun retrieveDeal(@Path("dealId") dealId: Long): DealFull
 }

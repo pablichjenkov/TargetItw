@@ -1,21 +1,25 @@
-package com.target.targetcasestudy.ui
+package com.target.targetcasestudy.ui.view
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.collection.arrayMapOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.target.targetcasestudy.R
-import com.target.targetcasestudy.api.Deal
-import com.target.targetcasestudy.data.DealCell
+import com.target.targetcasestudy.api.DealPartial
+import com.target.targetcasestudy.ui.ViewModelFactory
+import com.target.targetcasestudy.ui.view.adapter.*
+import com.target.targetcasestudy.ui.viewmodel.DealListVM
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -69,13 +73,23 @@ class DealListFragment : Fragment() {
             dealListVM.dealListStateFlow.collect {
                 when (val dealListState = it) {
                     DealListVM.DealListState.Idle -> {
+                        dealListVM.requestDealList()
                     }
                     DealListVM.DealListState.Loading -> {
 
                     }
                     is DealListVM.DealListState.Data -> {
+                        val renderersMap = arrayMapOf<Int, BaseRenderer<IGenericCell, GenericViewHolder>>(
+                            Pair(R.layout.deal_list_item, SmallCellRenderer() as BaseRenderer<IGenericCell, GenericViewHolder>),
+                            Pair(R.layout.deal_list_item_big, BigCellRenderer() as BaseRenderer<IGenericCell, GenericViewHolder>),
+                            Pair(R.layout.deal_list_item_description, DescriptionCellRenderer() as BaseRenderer<IGenericCell, GenericViewHolder>)
+                        )
                         val dealCellList = mapDealToDealCell(dealListState.dealList)
-                        recyclerView.adapter = DealItemAdapter(dealCellList)
+                        recyclerView.adapter = GenericCellAdapter(
+                            renderersMap,
+                            dealCellList,
+                            ::onCellClick
+                        )
                     }
                     is DealListVM.DealListState.Error -> {
 
@@ -83,13 +97,17 @@ class DealListFragment : Fragment() {
                 }
             }
         }
-
-        dealListVM.requestDealList()
-
     }
 
-    private fun mapDealToDealCell(dealList: List<Deal>): List<DealCell> {
-        return dealList.map { DealCell(it) }
+    private fun mapDealToDealCell(dealList: List<DealPartial>): List<DealCellSmall> {
+        return dealList.map { DealCellSmall(it) }
+    }
+
+    private fun onCellClick(dealCell: DealCellSmall) {
+        val navAction = DealListFragmentDirections.navactionDealListFragmentToDealItemFragment(
+            dealCell.deal.id
+        )
+        findNavController().navigate(navAction)
     }
 
 }

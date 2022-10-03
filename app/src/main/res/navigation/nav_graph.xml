@@ -4,6 +4,19 @@
     app:startDestination="@id/dealListFragment">
     <fragment
         android:id="@+id/dealListFragment"
-        android:name="com.target.targetcasestudy.ui.DealListFragment"
-        tools:layout="@layout/fragment_deal_list" />
+        android:name="com.target.targetcasestudy.ui.view.DealListFragment"
+        tools:layout="@layout/fragment_deal_list">
+        <action
+            android:id="@+id/navaction_dealListFragment_to_dealItemFragment"
+            app:destination="@id/dealItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dealItemFragment"
+        android:name="com.target.targetcasestudy.ui.view.DealItemFragment"
+        tools:layout="@layout/fragment_deal_item">
+        <argument
+            android:name="dealId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </fragment>
 </navigation>
