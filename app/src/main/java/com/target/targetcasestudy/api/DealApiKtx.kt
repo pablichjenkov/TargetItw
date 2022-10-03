@@ -5,9 +5,9 @@ import retrofit2.http.Path
 
 interface DealApiKtx {
 
-  @GET("${BASE_URL}deals")
-  suspend fun retrieveDeals(): List<Deal>
+  @GET("${Urls.BASE_URL}/deals")
+  suspend fun retrieveDeals(): DealsResponse
 
-  @GET("${BASE_URL}deals/{dealId}")
+  @GET("${Urls.BASE_URL}/deals/{dealId}")
   suspend fun retrieveDeal(@Path("dealId") dealId: String): Deal
 }

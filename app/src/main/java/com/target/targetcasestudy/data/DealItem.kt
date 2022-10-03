@@ -1,10 +1,8 @@
 package com.target.targetcasestudy.data
 
-data class DealItem(
-  var id: Int,
-  var title: String,
-  var description: String,
-  var price: String,
-  var aisle: String,
-  val imageUrl: String = "https://picsum.photos/200"
-)
+import com.target.targetcasestudy.R
+import com.target.targetcasestudy.api.Deal
+
+class DealCell(val deal: Deal) : IAdapterItem(R.layout.deal_list_item) {
+
+}

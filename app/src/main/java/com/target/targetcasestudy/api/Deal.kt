@@ -1,15 +1,29 @@
 package com.target.targetcasestudy.api
 
+import com.google.gson.annotations.SerializedName
+
 data class Deal(
-  val id: String,
+    @SerializedName("id")
+    val id: Long,
 
-  val title: String,
+    @SerializedName("title")
+    val title: String,
 
-  val aisle: String,
+    @SerializedName("aisle")
+    val aisle: String,
 
-  val description: String,
+    @SerializedName("description")
+    val description: String,
 
-  val salePrice: Price,
+    @SerializedName("regular_price")
+    val salePrice: Price,
 
-  val imageUrl: String
+    @SerializedName("image_url")
+    val imageUrl: String,
+
+    @SerializedName("availability")
+    val availability: String,
+
+    @SerializedName("fulfillment")
+    val fulfillment: String,
 )
