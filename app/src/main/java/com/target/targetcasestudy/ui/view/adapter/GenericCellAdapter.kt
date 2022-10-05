@@ -31,7 +31,7 @@ class GenericCellAdapter(
     private fun getRendererForViewType(
         viewType: Int
     ): BaseRenderer<IGenericCell, GenericViewHolder> {
-        return renderersMap[viewType] ?: throw IllegalStateException("Missing Renderer Type")
+        return renderersMap[viewType] ?: throw IllegalStateException("Missing BaseRenderer Type")
     }
 
     private fun getViewHolderForViewType(
@@ -40,7 +40,7 @@ class GenericCellAdapter(
         onCellClick: (DealCellSmall) -> Unit
     ): GenericViewHolder {
         return renderersMap[viewType]?.getVH(parent, onCellClick)
-            ?: throw IllegalStateException("Missing Renderer Type")
+            ?: throw IllegalStateException("Missing GenericViewHolder Type")
     }
 
 }
