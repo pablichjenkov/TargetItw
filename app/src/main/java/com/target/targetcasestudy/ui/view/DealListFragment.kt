@@ -17,7 +17,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.api.DealPartial
 import com.target.targetcasestudy.ui.ViewModelFactory
-import com.target.targetcasestudy.ui.view.adapter.*
+import com.target.targetcasestudy.ui.view.adapter.DealSmallCell
+import com.target.targetcasestudy.ui.view.adapter.GenericCellAdapter
+import com.target.targetcasestudy.ui.view.adapter.IGenericCell
 import com.target.targetcasestudy.ui.view.adapter.renders.CellRender
 import com.target.targetcasestudy.ui.view.adapter.renders.SmallCellRender
 import com.target.targetcasestudy.ui.viewmodel.DealListVM
@@ -99,12 +101,12 @@ class DealListFragment : Fragment() {
         dealList: List<DealPartial>
     ): List<CellRender<out IGenericCell>> {
         return dealList.map {
-            val smallCell = DealCellSmall(it)
+            val smallCell = DealSmallCell(it)
             SmallCellRender(smallCell, ::onCellClick)
         }
     }
 
-    private fun onCellClick(cell: DealCellSmall) {
+    private fun onCellClick(cell: DealSmallCell) {
         val navAction = DealListFragmentDirections.navactionDealListFragmentToDealItemFragment(
             cell.deal.id
         )

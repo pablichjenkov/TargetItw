@@ -18,7 +18,7 @@ internal class DealListVMTest {
 
         val collectionDealUseCase = object : IDealCollectionUseCase {
             override suspend fun getAll(): DealCollectionUseCase.Result {
-                // Pretend a delay to avoid conflation in the StateFlow so Loding event does not
+                // Pretend a delay to avoid conflation in the StateFlow so Loading event does not
                 // get override with Data
                 delay(20)
                 return DealCollectionUseCase.Result.Success(FakeDataGenerator.createPartialDealList())

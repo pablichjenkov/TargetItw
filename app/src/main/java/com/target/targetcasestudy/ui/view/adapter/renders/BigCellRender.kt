@@ -1,12 +1,12 @@
 package com.target.targetcasestudy.ui.view.adapter.renders
 
-import com.target.targetcasestudy.ui.view.adapter.DealCellBig
+import com.target.targetcasestudy.ui.view.adapter.BigDealCell
 import com.target.targetcasestudy.ui.view.adapter.viewholder.BigCellViewHolder
 import com.target.targetcasestudy.ui.view.adapter.viewholder.GenericViewHolder
 
 class BigCellRender(
-    cell: DealCellBig
-) : CellRender<DealCellBig>(cell) {
+    cell: BigDealCell
+) : CellRender<BigDealCell>(cell) {
     override fun bind(holder: GenericViewHolder) {
         val bigCellHolder = holder as BigCellViewHolder
         loadImage(holder.itemImage, cell.deal.imageUrl)

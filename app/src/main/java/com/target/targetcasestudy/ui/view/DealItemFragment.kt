@@ -72,13 +72,10 @@ class DealItemFragment : Fragment() {
             dealItemVM.fullDealStateFlow.collect {
                 when (val fullDealState = it) {
                     is DealItemVM.SingleDealState.Data -> {
-                        val fullDealCell = DealCellBig(fullDealState.fullDeal)
-                        val descCell = DealCellDescription(fullDealState.fullDeal)
-
-                        val cells = mutableListOf<IGenericCell>(fullDealCell, descCell)
+                        val fullDealCell = BigDealCell(fullDealState.fullDeal)
+                        val descCell = DealInfoCell(fullDealState.fullDeal)
 
                         recyclerView.adapter = GenericCellAdapter(
-                            //getCellRenderers(),
                             listOf(
                                 BigCellRender(
                                     fullDealCell
@@ -92,7 +89,6 @@ class DealItemFragment : Fragment() {
                     }
                     is DealItemVM.SingleDealState.Error -> {
                         recyclerView.adapter = GenericCellAdapter(
-                            //getCellRenderers(),
                             listOf(
                                 ErrorCellRender(
                                     ErrorCell(fullDealState.apiError)

@@ -4,11 +4,11 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import com.target.targetcasestudy.R
-import com.target.targetcasestudy.ui.view.adapter.DealCellSmall
+import com.target.targetcasestudy.ui.view.adapter.DealSmallCell
 
 class SmallCellViewHolder(
     itemView: View,
-    onCellClick: (DealCellSmall) -> Unit
+    onCellClick: (DealSmallCell) -> Unit
 ) : GenericViewHolder(itemView) {
     val itemImage = itemView.findViewById<ImageView>(R.id.deal_list_item_image_view)
     val itemTitle = itemView.findViewById<TextView>(R.id.deal_list_item_title)
@@ -18,7 +18,7 @@ class SmallCellViewHolder(
     val itemAvailability = itemView.findViewById<TextView>(R.id.deal_list_item_stock_status)
     val aisleInfo = itemView.findViewById<TextView>(R.id.deal_list_item_stock_info)
 
-    lateinit var currentCell: DealCellSmall
+    lateinit var currentCell: DealSmallCell
 
     init {
         itemView.setOnClickListener {
