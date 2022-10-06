@@ -2,10 +2,12 @@ package com.target.targetcasestudy.ui.view.adapter
 
 import android.view.ViewGroup
 import androidx.collection.ArrayMap
+import androidx.collection.arrayMapOf
 import androidx.recyclerview.widget.RecyclerView
+import com.target.targetcasestudy.R
 
 class GenericCellAdapter(
-    private val renderersMap: ArrayMap<Int, BaseRenderer<IGenericCell, GenericViewHolder>>,
+    private val renderersMap: ArrayMap<Int, BaseRenderer<out IGenericCell, out GenericViewHolder>>,
     private val cellList: List<IGenericCell>,
     private val onCellClick: (DealCellSmall) -> Unit
 ) : RecyclerView.Adapter<GenericViewHolder>() {
@@ -25,12 +27,12 @@ class GenericCellAdapter(
     override fun onBindViewHolder(holder: GenericViewHolder, position: Int) {
         val cell = cellList[position]
         val renderer = getRendererForViewType(cell.viewType)
-        renderer.bind(cell, holder)
+        renderer.bindIn(cell, holder)
     }
 
     private fun getRendererForViewType(
         viewType: Int
-    ): BaseRenderer<IGenericCell, GenericViewHolder> {
+    ): BaseRenderer<out IGenericCell, out GenericViewHolder> {
         return renderersMap[viewType] ?: throw IllegalStateException("Missing BaseRenderer Type")
     }
 

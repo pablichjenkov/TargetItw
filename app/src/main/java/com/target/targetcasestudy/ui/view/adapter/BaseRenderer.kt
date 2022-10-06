@@ -9,7 +9,11 @@ import com.bumptech.glide.request.RequestOptions
 
 abstract class BaseRenderer<M : IGenericCell, VH : GenericViewHolder> {
 
-    abstract fun bind(cell: M, holder: VH)
+    protected abstract fun bind(cell: M, holder: VH)
+
+    fun bindIn(cell: IGenericCell, holder: GenericViewHolder) {
+        bind(cell as M, holder as VH)
+    }
 
     abstract fun getVH(
         parent: ViewGroup,

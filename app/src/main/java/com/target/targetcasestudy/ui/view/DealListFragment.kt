@@ -79,11 +79,12 @@ class DealListFragment : Fragment() {
 
                     }
                     is DealListVM.DealListState.Data -> {
-                        val renderersMap = arrayMapOf<Int, BaseRenderer<IGenericCell, GenericViewHolder>>(
-                            Pair(R.layout.deal_list_item, SmallCellRenderer() as BaseRenderer<IGenericCell, GenericViewHolder>),
-                            Pair(R.layout.deal_list_item_big, BigCellRenderer() as BaseRenderer<IGenericCell, GenericViewHolder>),
-                            Pair(R.layout.deal_list_item_description, DescriptionCellRenderer() as BaseRenderer<IGenericCell, GenericViewHolder>)
+                        val renderersMap = arrayMapOf<Int, BaseRenderer<out IGenericCell, out GenericViewHolder>>(
+                            Pair(R.layout.deal_list_item, SmallCellRenderer()),
+                            Pair(R.layout.deal_list_item_big, BigCellRenderer()),
+                            Pair(R.layout.deal_list_item_description, DescriptionCellRenderer()),
                         )
+
                         val dealCellList = mapDealToDealCell(dealListState.dealList)
                         recyclerView.adapter = GenericCellAdapter(
                             renderersMap,
