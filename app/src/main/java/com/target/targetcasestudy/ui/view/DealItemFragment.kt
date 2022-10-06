@@ -5,8 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.collection.ArrayMap
-import androidx.collection.arrayMapOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -16,8 +14,11 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.target.targetcasestudy.R
-import com.target.targetcasestudy.ui.*
+import com.target.targetcasestudy.ui.ViewModelFactory
 import com.target.targetcasestudy.ui.view.adapter.*
+import com.target.targetcasestudy.ui.view.adapter.renders.BigCellRender
+import com.target.targetcasestudy.ui.view.adapter.renders.ErrorCellRender
+import com.target.targetcasestudy.ui.view.adapter.renders.InfoCellRender
 import com.target.targetcasestudy.ui.viewmodel.DealItemVM
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -77,16 +78,27 @@ class DealItemFragment : Fragment() {
                         val cells = mutableListOf<IGenericCell>(fullDealCell, descCell)
 
                         recyclerView.adapter = GenericCellAdapter(
-                            getCellRenderers(),
-                            cells
-                        ) { }
+                            //getCellRenderers(),
+                            listOf(
+                                BigCellRender(
+                                    fullDealCell
+                                ),
+                                InfoCellRender(
+                                    descCell
+                                )
+                            )
+                        )
 
                     }
                     is DealItemVM.SingleDealState.Error -> {
                         recyclerView.adapter = GenericCellAdapter(
-                            getCellRenderers(),
-                            listOf(ErrorCell(fullDealState.apiError))
-                        ) { }
+                            //getCellRenderers(),
+                            listOf(
+                                ErrorCellRender(
+                                    ErrorCell(fullDealState.apiError)
+                                )
+                            )
+                        )
                     }
                     DealItemVM.SingleDealState.Idle -> {
                         dealItemVM.requestFullDeal(args.dealId)
@@ -95,28 +107,6 @@ class DealItemFragment : Fragment() {
                 }
             }
         }
-    }
-
-
-    private fun getCellRenderers(): ArrayMap<Int, BaseRenderer<IGenericCell, GenericViewHolder>> {
-        return arrayMapOf<Int, BaseRenderer<IGenericCell, GenericViewHolder>>(
-            Pair(
-                R.layout.deal_list_item,
-                SmallCellRenderer() as BaseRenderer<IGenericCell, GenericViewHolder>
-            ),
-            Pair(
-                R.layout.deal_list_item_big,
-                BigCellRenderer() as BaseRenderer<IGenericCell, GenericViewHolder>
-            ),
-            Pair(
-                R.layout.deal_list_item_description,
-                DescriptionCellRenderer() as BaseRenderer<IGenericCell, GenericViewHolder>
-            ),
-            Pair(
-                R.layout.deal_list_item_error,
-                ErrorCellRenderer() as BaseRenderer<IGenericCell, GenericViewHolder>
-            )
-        )
     }
 
 }

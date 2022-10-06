@@ -1,48 +1,39 @@
 package com.target.targetcasestudy.ui.view.adapter
 
 import android.view.ViewGroup
-import androidx.collection.ArrayMap
-import androidx.collection.arrayMapOf
 import androidx.recyclerview.widget.RecyclerView
-import com.target.targetcasestudy.R
+import com.target.targetcasestudy.ui.view.adapter.renders.CellRender
+import com.target.targetcasestudy.ui.view.adapter.viewholder.GenericViewHolder
 
 class GenericCellAdapter(
-    private val renderersMap: ArrayMap<Int, BaseRenderer<out IGenericCell, out GenericViewHolder>>,
-    private val cellList: List<IGenericCell>,
-    private val onCellClick: (DealCellSmall) -> Unit
+    //private val renderersMap: ArrayMap<Int, KClass<out BaseRenderer<out IGenericCell, out GenericViewHolder>>>,
+    private val cellRenders: List<CellRender<out IGenericCell>>
 ) : RecyclerView.Adapter<GenericViewHolder>() {
 
     override fun getItemCount(): Int {
-        return cellList.size
+        return cellRenders.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        return cellList[position].viewType
+        return cellRenders[position].cell.viewType
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GenericViewHolder {
-        return getViewHolderForViewType(viewType, parent, onCellClick)
+        return getViewHolderForViewType(viewType, parent)
     }
 
     override fun onBindViewHolder(holder: GenericViewHolder, position: Int) {
-        val cell = cellList[position]
-        val renderer = getRendererForViewType(cell.viewType)
-        renderer.bindIn(cell, holder)
-    }
-
-    private fun getRendererForViewType(
-        viewType: Int
-    ): BaseRenderer<out IGenericCell, out GenericViewHolder> {
-        return renderersMap[viewType] ?: throw IllegalStateException("Missing BaseRenderer Type")
+        val cellRender = cellRenders[position]
+        cellRender.bind(holder)
+        //val renderer = getRendererForViewType(cell.viewType)
+        //renderer.bindIn(cell, holder)
     }
 
     private fun getViewHolderForViewType(
         viewType: Int,
-        parent: ViewGroup,
-        onCellClick: (DealCellSmall) -> Unit
+        parent: ViewGroup
     ): GenericViewHolder {
-        return renderersMap[viewType]?.getVH(parent, onCellClick)
-            ?: throw IllegalStateException("Missing GenericViewHolder Type")
+        return CellRender.getViewHolderForViewType(viewType, parent)
     }
 
 }

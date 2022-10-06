@@ -1,8 +1,8 @@
-package com.target.targetcasestudy.ui.view.adapter
+package com.target.targetcasestudy.ui.view.adapter.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-abstract class GenericViewHolder(
+sealed class GenericViewHolder(
     itemView: View
 ) : ViewHolder(itemView)
