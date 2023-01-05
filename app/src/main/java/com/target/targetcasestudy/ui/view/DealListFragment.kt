@@ -16,11 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.target.targetcasestudy.R
 import com.target.targetcasestudy.api.DealPartial
+import com.target.targetcasestudy.data.ApiError
 import com.target.targetcasestudy.ui.ViewModelFactory
 import com.target.targetcasestudy.ui.view.adapter.DealSmallCell
+import com.target.targetcasestudy.ui.view.adapter.ErrorCell
 import com.target.targetcasestudy.ui.view.adapter.GenericCellAdapter
 import com.target.targetcasestudy.ui.view.adapter.IGenericCell
 import com.target.targetcasestudy.ui.view.adapter.renders.CellRender
+import com.target.targetcasestudy.ui.view.adapter.renders.ErrorCellRender
 import com.target.targetcasestudy.ui.view.adapter.renders.SmallCellRender
 import com.target.targetcasestudy.ui.viewmodel.DealListVM
 import dagger.hilt.android.AndroidEntryPoint
@@ -90,7 +93,18 @@ class DealListFragment : Fragment() {
                         )
                     }
                     is DealListVM.DealListState.Error -> {
-
+                        recyclerView.adapter = GenericCellAdapter(
+                            listOf(
+                                ErrorCellRender(
+                                    ErrorCell(
+                                        ApiError(
+                                            "-123",
+                                            dealListState.errorMsg
+                                        )
+                                    )
+                                )
+                            )
+                        )
                     }
                 }
             }
